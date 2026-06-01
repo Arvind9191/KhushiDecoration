@@ -1,0 +1,1755 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+} 
+
+
+<style>
+     .custom-carousel {
+            height: 70vh;  
+            min-height: 400px;
+            overflow: hidden;
+        }
+        .carousel-inner, .carousel-item {
+            height: 100%;
+        }         
+        .slide-content-wrapper {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            padding: 0 8%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }         
+        .slide-text-side {
+            flex: 1;
+            color: #ffffff;
+            z-index: 2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-in-out forwards;
+        }         
+        .slide-img-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            z-index: 2;
+        }         
+        .decorator-png {
+            max-height: 80%;
+            max-width: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.4));
+            animation: scaleIn 0.8s ease-in-out forwards;
+        }         
+            
+        .custom-carousel .carousel-control-prev,
+        .custom-carousel .carousel-control-next {
+            width: 5%;
+        }        
+        .control-icon-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            padding: 12px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .control-icon-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }   
+        .control-icon-btn {
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+        }
+
+        .control-icon-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            transform: scale(1.08);
+        }         
+        .carousel-indicators [data-bs-target] {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 6px;
+        } 
+
+        @@keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @@keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }     
+        @@media (max-width: 991.98px) {
+            .custom-carousel {
+                height: 55vh;
+            }
+            .slide-content-wrapper {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding: 20px;
+            }
+            .slide-img-side {
+                max-height: 40%;
+                margin-top: 15px;
+            }
+            .decorator-png {
+                max-height: 100%;
+            }
+        }  
+
+
+
+
+
+
+
+
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+.section-title {
+    color: #4A154B;  
+    font-size: 1.8rem;
+} 
+.occ-card {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.occ-card:hover {
+    transform: translateY(-5px); 
+}
+ 
+.occ-img-wrapper {
+    background-color: #FFF2E6;  
+    border: 2px solid #FFE0C2;
+    border-radius: 40px;  
+    padding: 20px;
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+ 
+.occ-img {
+    border-radius: 24px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+ 
+.occ-title {
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555555;
+    letter-spacing: 0.5px;
+}
+ 
+@@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.4rem;
+    }
+    .occ-img-wrapper {
+        border-radius: 25px;
+        padding: 12px;
+    }
+    .occ-img {
+        border-radius: 16px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+ 
+.category-scroll-container {
+    display: flex;
+    overflow-x: auto;          
+    white-space: nowrap;
+    gap: 20px;
+    padding: 15px 10px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; 
+ 
+.category-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+ 
+.category-scroll-container {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+ 
+.category-item {
+    flex: 0 0 auto;            
+    width: 120px;              
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.category-item:hover {
+    transform: scale(1.05);   
+} 
+.category-blob-wrapper {
+    background-color: #FFF3EB;  
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;  
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;          
+}
+ 
+.category-img {
+    max-width: 150%;
+    max-height: 150%;
+    object-fit: contain;       
+}
+ 
+.category-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1D2A44;            
+    word-wrap: break-word;
+    white-space: normal;      
+    line-height: 1.2;
+    margin: 0;
+}
+ 
+
+@@media (min-width: 992px) {
+    .category-scroll-container {
+        justify-content: center;  
+        flex-wrap: wrap;          
+    }
+    .category-item {
+        width: 130px;
+    } 
+}}
+ 
+
+
+
+
+
+
+ .decor-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,.10);
+    transition: all .4s ease;
+    height: 100%;
+    position: relative;
+}
+
+.decor-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 18px 35px rgba(0,0,0,.20);
+}
+
+.decor-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.decor-image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+
+.decor-card:hover .decor-image {
+    transform: scale(1.08);
+}
+
+.wishlist-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,.9);
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.wishlist-btn:hover {
+    background: #fff;
+}
+
+.decor-content {
+    padding: 18px;
+}
+
+.decor-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.decor-location {
+    color: #777;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.decor-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.rating {
+    color: #FFC107;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+}
+
+.book-btn {
+    background: #6f2dbd;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.book-btn:hover {
+    background: #5a189a;
+    color: #fff;
+} 
+@@media(max-width:992px){
+    .decor-image{
+        height:280px;
+    }
+    .decor-title{
+        font-size:20px;
+    }
+} 
+@@media(max-width:576px){
+    .decor-image{
+        height:250px;
+    }
+    .decor-title{
+        font-size:18px;
+    }
+    .price{
+        font-size:20px;
+    }
+    .book-btn{
+        padding:8px 14px;
+        font-size:13px;
+    }
+}
+
+
+
+
+/* Base Fonts */
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+/* ================= ROW 1: MAIN BANNER STYLE ================= */
+.kids-main-banner {
+    /* Playful Warm Soft Orange/Yellow Gradient matching the image */
+    background-image: url(https://cheetah.cherishx.com/website_layout/1680x400_Banner-2_Desktop_home_page_layout.jpg?format=avif);
+    border-radius: 24px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 10px 30px rgba(254, 209, 118, 0.25);
+    padding-bottom: 80px !important; 
+    padding-bottom: 50px !important;
+    border-radius: 16px;
+}
+.kids-banner-heading {
+    font-family: 'Fredoka One', cursive, sans-serif;
+    color: #007791;  
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0; 
+}
+
+.kids-banner-subheading {
+    font-family: 'Fredoka One', cursive, sans-serif;
+    color: #005662;
+    font-size: 2.6rem;
+    font-weight: 800;
+} 
+.kids-pill-container {
+    background-color: #d81b60; 
+    padding: 6px 24px;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.kids-badge {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.kids-badge-sep {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: bold;
+}
+ 
+.css-cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 100px;
+    pointer-events: none;
+}
+.css-cloud::before, .css-cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+}
+.top-left-cloud {
+    width: 120px; height: 40px; top: 10px; left: -20px;
+}
+.top-right-cloud {
+    width: 150px; height: 50px; top: 20px; right: -30px;
+}
+ 
+/* ================= RESPONSIVE DESIGN FOR SMALL PHONES / TABLETS ================= */
+@@media (max-width: 768px) {
+    .kids-banner-heading {
+        font-size: 1.5rem;
+    }
+    .kids-banner-subheading {
+        font-size: 1.8rem;
+    }
+    .kids-pill-container {
+        padding: 4px 15px;
+    }
+    .kids-badge {
+        font-size: 0.8rem;
+    } 
+     
+    .kids-overlap-row {
+        margin-top: -30px;  
+    }
+    .attached-card-title {
+        font-size: 1.05rem;
+    }
+    .attached-img-wrapper {
+        max-width: 260px;  
+        margin: 0 auto;
+    }
+}
+
+
+
+
+
+
+
+.prewedding-section {
+    padding: 30px 15px;
+    background: #fff;
+}
+
+.prewedding-title {
+    background: #d89200;
+    color: white;
+    text-align: center;
+    font-size: 48px;
+    letter-spacing: 4px;
+    padding: 12px;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.prewedding-title span {
+    font-weight: 700;
+}
+
+/* Banner Area */
+
+.prewedding-banner {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+}
+
+/* Main Banner */
+
+.center-banner img {
+    width: 100%;
+    display: block;
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+     order:1; 
+}
+
+/* Side Cards */
+
+.side-card {
+    position: absolute;
+    width: 320px;
+    height: 260px;
+    background: rgba(255,255,255,.85);
+    border: 4px solid #d89200;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+    transition: .4s ease;
+}
+
+.side-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.side-card:hover {
+    transform: scale(1.05);
+}
+
+/* Left Box */
+
+.left-card {
+    left: 80px;
+    bottom: 20px;
+}
+
+/* Right Box */
+
+.right-card {
+    right: 80px;
+    bottom: 20px;
+}
+
+.card-title {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(216,146,0,.9);
+    color: #fff;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Tablet */
+
+@@media(max-width:992px){
+
+    .prewedding-title{
+        font-size:32px;
+    }
+
+    .side-card{
+        width:220px;
+        height:180px;
+    }
+
+    .left-card{
+        left:20px;
+    }
+
+    .right-card{
+        right:20px;
+    }
+}
+
+/* Mobile */
+
+@@media(max-width:768px){
+
+    .prewedding-title{
+        font-size:24px;
+        letter-spacing:2px;
+    }
+
+    .prewedding-banner{
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+    }
+     
+
+    .left-card,
+    .right-card{
+        position:relative;
+        width:100%;
+        height:220px;
+        left:auto;
+        right:auto;
+        bottom:auto;
+    }
+
+    .left-card{
+        order:2;
+    }
+
+    .right-card{
+        order:3;
+    }
+}
+
+
+
+</style>   
+<div class="row">
+    <div class="col-12">
+        <div id="heroSlider" class="carousel slide custom-carousel" data-bs-ride="carousel" data-bs-interval="4000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="slide-content-wrapper" style="background-image: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(30,41,59,0.8)), url('https://picsum.photos');">
+                        <div class="slide-text-side">
+                            <span class="badge bg-danger mb-2">Live Offers</span>
+                            <h1 class="display-5 fw-bold">Premium Event Design</h1>
+                            <p class="lead">Book premium, affordable birthday and anniversary setups directly in your neighborhood layout.</p>
+                            <a href="#" class="btn btn-danger mt-2 px-4 py-2 fw-semibold">Book Now</a>
+                        </div>
+                        <div class="slide-img-side">
+                            <img src="https://cheetah.cherishx.com/website_layout/1680x400_Banner_Premium-Decorations_Desktop_20241116_122654.jpg?format=avif" class="img-fluid decorator-png rounded-3" alt="Decor Element">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="slide-content-wrapper" style="background-image: linear-gradient(135deg, rgba(88,21,114,0.9), rgba(40,11,70,0.8)), url('https://picsum.photos');">
+                        <div class="slide-text-side">
+                            <span class="badge bg-warning text-dark mb-2">Trending</span>
+                            <h1 class="display-5 fw-bold">Grand Balloon Backdrops</h1>
+                            <p class="lead">Hand-crafted custom setups utilizing premium chrome and pastel combinations for any corporate event.</p>
+                            <a href="#" class="btn btn-warning mt-2 px-4 py-2 fw-semibold">Explore Themes</a>
+                        </div>
+                        <div class="slide-img-side">
+                            <img src="https://unsplash.com" class="img-fluid decorator-png rounded-3" alt="Decor Element 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
+                <span class="control-icon-btn" aria-hidden="true">
+                    <i class="bi bi-chevron-left text-white fs-4"></i>
+                </span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next">
+                <span class="control-icon-btn" aria-hidden="true">
+                    <i class="bi bi-chevron-right text-white fs-4"></i>
+                </span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row col">
+    <div class="container font-poppins">
+        <div class="text-center mb-3">
+            <h2 class="fw-bold section-title">Make Every Occasion Extra Special</h2>
+        </div>
+        <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
+            <div class="col">
+                <div class="occ-card text-center h-100">
+                    <div class="occ-img-wrapper">
+                        <img src="https://cheetah.cherishx.com/uploads/balloons-and-bow-birthday-decor.jpg?format=avif&width=3840&height=3840" alt="Birthday Decoration" class="img-fluid occ-img">
+                    </div>
+                    <h5 class="occ-title">Birthday</h5>
+                </div>
+            </div>
+            <div class="col">
+                <div class="occ-card text-center h-100">
+                    <div class="occ-img-wrapper">
+                        <img src="https://cheetah.cherishx.com/uploads/pink-and-silver-birthday-bliss-decor.jpg?format=avif&width=3840&height=3840" alt="Baby Welcome" class="img-fluid occ-img">
+                    </div>
+                    <h5 class="occ-title">Baby Welcome</h5>
+                </div>
+            </div>
+            <div class="col">
+                <div class="occ-card text-center h-100">
+                    <div class="occ-img-wrapper">
+                        <img src="https://cheetah.cherishx.com/uploads/pink-glitter-and-pookie-vibes-dreamy-birthday-decoration.jpg?format=avif&width=3840&height=3840" alt="Baby Shower" class="img-fluid occ-img">
+                    </div>
+                    <h5 class="occ-title">Baby Shower</h5>
+                </div>
+            </div>
+            <div class="col">
+                <div class="occ-card text-center h-100">
+                    <div class="occ-img-wrapper">
+                        <img src="https://cheetah.cherishx.com/website_layout/550x550_Occasions-we-celebrate_Mob._8_20240930_132612.jpg?format=avif" alt="Candlelight Dinner" class="img-fluid occ-img">
+                    </div>
+                    <h5 class="occ-title">Candlelight Dinner</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row col">
+  <div class="container font-poppins"> 
+    <div class="text-center mb-5">
+        <h2 class="fw-bold section-title">Make Every Occasion Extra Special</h2>
+    </div>     
+    <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
+        <div class="col">
+            <div class="occ-card text-center h-100">
+                <div class="occ-img-wrapper">
+                    <!-- Aap dynamic path use kar sakte hain: src="~/images/birthday.jpg" -->
+                    <img src="https://cheetah.cherishx.com/website_layout/550x550_Occasions-we-celebrate_Mob._7_20240930_132612.jpg?format=avif" alt="Birthday Decoration" class="img-fluid occ-img">
+                </div>
+                <h5 class="occ-title">Birthday</h5>
+            </div>
+        </div>
+        <div class="col">
+            <div class="occ-card text-center h-100">
+                <div class="occ-img-wrapper">
+                    <img src="https://cheetah.cherishx.com/website_layout/550x550_Occasions-we-celebrate_Mob._03_20240930_132612.jpg?format=avif" alt="Baby Welcome" class="img-fluid occ-img">
+                </div>
+                <h5 class="occ-title">Baby Welcome</h5>
+            </div>
+        </div>
+        <div class="col">
+            <div class="occ-card text-center h-100">
+                <div class="occ-img-wrapper">
+                    <img src="https://cheetah.cherishx.com/website_layout/550x550_Occasions-we-celebrate_Mob._02_20240930_132612.jpg?format=avif" alt="Baby Shower" class="img-fluid occ-img">
+                </div>
+                <h5 class="occ-title">Baby Shower</h5>
+            </div>
+        </div>
+        <div class="col">
+            <div class="occ-card text-center h-100">
+                <div class="occ-img-wrapper">
+                    <img src="https://cheetah.cherishx.com/website_layout/550x550_Occasions-we-celebrate_Mob._8_20240930_132612.jpg?format=avif" alt="Candlelight Dinner" class="img-fluid occ-img">
+                </div>
+                <h5 class="occ-title">Candlelight Dinner</h5>
+            </div>
+        </div>
+    </div>
+  </div>         
+ </div> 
+<div class="row col">
+     <div class="font-poppins"> 
+    <div class="category-scroll-container">         
+        <div class="category-item">
+            <div class="category-blob-wrapper">
+                <img src="https://cheetah.cherishx.com/website_layout/1776422217__original_layout_55.jpg?format=avif" alt="Kids Activities" class="category-img">
+            </div>
+            <p class="category-title">Kids Activities</p>
+        </div> 
+        <div class="category-item">
+            <div class="category-blob-wrapper">
+                <img src="https://cheetah.cherishx.com/website_layout/1776496742__original_layout_55.jpg?format=avif" alt="Kids Birthday Decoration" class="category-img">
+            </div>
+            <p class="category-title">Kids Birthday Decoration</p>
+        </div>         
+        <div class="category-item">
+            <div class="category-blob-wrapper">
+                <img src="https://cheetah.cherishx.com/website_layout/1776321230__original_layout_55.jpg?format=avif" alt="Anniversary Decoration" class="category-img">
+            </div>
+            <p class="category-title">Anniversary Decoration</p>
+        </div>         
+        <div class="category-item">
+            <div class="category-blob-wrapper">
+                <img src="https://cheetah.cherishx.com/website_layout/1776321244__original_layout_55.jpg?format=avif" alt="Haldi Mehndi Decoration" class="category-img">
+            </div>
+            <p class="category-title">Haldi Mehndi Decoration</p>
+        </div>
+        <div class="category-item">
+            <div class="category-blob-wrapper">
+                <img src="https://cheetah.cherishx.com/website_layout/1776321274__original_layout_55.jpg?format=avif" alt="Personalised Gift" class="category-img">
+            </div>
+            <p class="category-title">Personalised Gift</p>
+        </div>
+        <div class="category-item">
+            <div class="category-blob-wrapper">
+                <img src="https://cheetah.cherishx.com/website_layout/1776321293__original_layout_55.jpg?format=avif" alt="Corporate Event Decoration" class="category-img">
+            </div>
+            <p class="category-title">Corporate Event Decoration</p>
+        </div>
+        <div class="category-item">
+            <div class="category-blob-wrapper">
+                <img src="https://cheetah.cherishx.com/website_layout/1776321310__original_layout_55.jpg?format=avif" alt="Proposal Setup" class="category-img">
+            </div>
+            <p class="category-title">Proposal Setup</p>
+        </div>
+        <div class="category-item">
+            <div class="category-blob-wrapper">
+                <img src="https://cheetah.cherishx.com/website_layout/1776321334__original_layout_55.jpg?format=avif" alt="Bachelorette Decoration" class="category-img">
+            </div>
+            <p class="category-title">Bachelorette Decoration</p>
+        </div>          
+    </div>
+</div>
+
+
+
+ </div> 
+  <!-- ================= SECTION 2: HERO PROMO BANNER ================= -->
+  <div class="row">
+      <div class="col-12 text-center"> 
+            <h3 class="banner-section-title">Level Up Your Birthday Party</h3>
+        </div> 
+  </div>
+ <div class="row col">    
+    <div class="">              
+        <div class="birthday-promo-banner overflow-hidden">
+            <div class="row g-0 align-items-stretch">
+                <!-- Left Responsive Image -->
+                <div class="col-12 position-relative banner-img-height">
+                    <img src="https://cheetah.cherishx.com/website_layout/1751026272__original_layout_55.jpg?format=avif"
+                         alt="Party Celebration" class="banner-live-img" style="width:100%" >
+                    <div class="banner-img-overlay d-none d-md-block"></div>
+                </div>                 
+            </div>
+        </div>
+    </div>      
+ </div> 
+  <!-- ================= SECTION 3: RESPONSIVE CARDS GRID ================= --> 
+
+  <div class="container-fluid col-12 mt-3 mb-2">   
+    <div class="row g-4">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+             <div class="decor-image-wrapper">
+                 <img src="https://cheetah.cherishx.com/uploads/serengeti-safari-birthday-decoration-with-wild-animal-props.jpg?format=avif&width=3840&height=3840" class="decor-image" alt="Birthday Decor">
+                 <button class="wishlist-btn">♡</button>
+             </div>            
+            <div class="decor-content">
+                <h5 class="decor-title">Balloons And Bow Birthday Decor</h5>
+                <p class="decor-location">At your location</p> 
+                <div class="decor-footer"> 
+                    <div>
+                        <div class="rating">★★★★★</div>
+                        <a href="#" class="book-btn">BOOK NOW</a>
+                    </div>
+                    <div class="price">₹7599</div> 
+                </div> 
+            </div>  
+        </div>
+</div> 
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/kids-batman-ring-decoration-setup.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+          <div class="decor-card">  
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/yellow-elegance-for-a-special-annaprashan.jpg?format=avif&width=3840&height=3840" class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+
+        <div class="decor-footer">
+
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+
+            <div class="price">
+                ₹7599
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/white-and-gold-bliss-floral-birthday-decoration.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div> 
+  </div> 
+
+  <div class="container-fluid col-12 mt-3 mb-2">   
+    <div class="row g-4">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+             <div class="decor-image-wrapper">
+                 <img src="https://cheetah.cherishx.com/uploads/balloons-and-bow-birthday-decor.jpg?format=avif&width=3840&height=3840" class="decor-image" alt="Birthday Decor">
+                 <button class="wishlist-btn">♡</button>
+             </div>            
+            <div class="decor-content">
+                <h5 class="decor-title">Balloons And Bow Birthday Decor</h5>
+                <p class="decor-location">At your location</p> 
+                <div class="decor-footer"> 
+                    <div>
+                        <div class="rating">★★★★★</div>
+                        <a href="#" class="book-btn">BOOK NOW</a>
+                    </div>
+                    <div class="price">₹7599</div> 
+                </div> 
+            </div>  
+        </div>
+</div> 
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/3d-pink-bow-birthday-backdrop-decor.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+          <div class="decor-card">  
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/glowing-butterfly-birthday-party-decoration.jpg?format=avif&width=3840&height=3840" class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+
+        <div class="decor-footer">
+
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+
+            <div class="price">
+                ₹7599
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/white-and-gold-bliss-floral-birthday-decoration.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div> 
+  </div>  
+
+ <div class="container-fluid col-12 mt-3 mb-2">   
+    <div class="row g-4">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+             <div class="decor-image-wrapper">
+                 <img src="https://cheetah.cherishx.com/uploads/birthday-special-balloon-decoration.jpg?format=avif&width=3840&height=3840" class="decor-image" alt="Birthday Decor">
+                 <button class="wishlist-btn">♡</button>
+             </div>            
+            <div class="decor-content">
+                <h5 class="decor-title">Balloons And Bow Birthday Decor</h5>
+                <p class="decor-location">At your location</p> 
+                <div class="decor-footer"> 
+                    <div>
+                        <div class="rating">★★★★★</div>
+                        <a href="#" class="book-btn">BOOK NOW</a>
+                    </div>
+                    <div class="price">₹7599</div> 
+                </div> 
+            </div>  
+        </div>
+</div> 
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/modern-birthday-vibes-with-a-black-and-silver-balloon-display.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+          <div class="decor-card">
+     
+
+    <div class="decor-image-wrapper">
+
+        <img src="https://cheetah.cherishx.com/uploads/golden-sparkle-balloon-bouquet.jpg?format=avif&width=3840&height=3840" class="decor-image"
+             alt="Birthday Decor">
+
+        <button class="wishlist-btn">
+            ♡
+        </button>
+
+    </div>
+
+    <div class="decor-content">
+
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+
+        <p class="decor-location">
+            At your location
+        </p>
+
+        <div class="decor-footer">
+
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+
+            <div class="price">
+                ₹7599
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/pink-and-silver-birthday-bliss-decor.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>   
+ <div class="container-fluid col-12 mt-3 mb-2">   
+    <div class="row g-4">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+             <div class="decor-image-wrapper">
+                 <img src="https://cheetah.cherishx.com/uploads/black-bows-and-balloons-decor-for-birthday.jpg?format=avif&width=3840&height=3840" class="decor-image" alt="Birthday Decor">
+                 <button class="wishlist-btn">♡</button>
+             </div>            
+            <div class="decor-content">
+                <h5 class="decor-title">Balloons And Bow Birthday Decor</h5>
+                <p class="decor-location">At your location</p> 
+                <div class="decor-footer"> 
+                    <div>
+                        <div class="rating">★★★★★</div>
+                        <a href="#" class="book-btn">BOOK NOW</a>
+                    </div>
+                    <div class="price">₹7599</div> 
+                </div> 
+            </div>  
+        </div>
+</div> 
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/pastel-and-rosegold-birthday-decoration.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+          <div class="decor-card">
+     
+
+    <div class="decor-image-wrapper">
+
+        <img src="https://cheetah.cherishx.com/uploads/romantic-umbrella-fairy-light-decoration.jpg?format=avif&width=3840&height=3840" class="decor-image"
+             alt="Birthday Decor">
+
+        <button class="wishlist-btn">
+            ♡
+        </button>
+
+    </div>
+
+    <div class="decor-content">
+
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+
+        <p class="decor-location">
+            At your location
+        </p>
+
+        <div class="decor-footer">
+
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+
+            <div class="price">
+                ₹7599
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/pink-glitter-and-pookie-vibes-dreamy-birthday-decoration.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>   
+ <!-- ================= SECTION 2: KIDS  BANNER ================= --> 
+ <div class="row col">    
+     <div class="container my-5 font-poppins position-relative">
+    
+    <!-- ROW 1: Main Top Banner -->
+    <div class="row">
+        <div class="col-12">
+            <div class="kids-main-banner text-center position-relative overflow-hidden">
+                <!-- Clouds Background Element (Pure CSS Graphic) -->
+                <div class="css-cloud top-left-cloud"></div>
+                <div class="css-cloud top-right-cloud"></div>
+                
+                <div class="banner-content-box py-5 px-3">
+                    <!-- Main Festive Heading -->
+                    <h2 class="kids-banner-heading">Host the Perfect</h2>
+                    <h1 class="kids-banner-subheading">Kids Theme Birthday Party</h1>
+                    
+                    <!-- Pink/Red Pill Badges Container -->
+                    <div class="d-inline-flex flex-wrap justify-content-center gap-2 mt-3 kids-pill-container">
+                        <span class="kids-badge">Decorations</span>
+                        <span class="kids-badge-sep">|</span>
+                        <span class="kids-badge">Games</span>
+                        <span class="kids-badge-sep">|</span>
+                        <span class="kids-badge">Activities</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+ </div> 
+ </div>
+ <div class="row">
+     <div class="col-12">
+         <div class="card">
+             <div class="card-header text-center">
+                 <h6 class="banner-section-title">Level Up Your Birthday Party</h6>
+             </div>
+             <div class="card-body">
+                 <div class="container-fluid col-12 mt-3 mb-2">   
+    <div class="row g-4">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+             <div class="decor-image-wrapper">
+                 <img src="https://cheetah.cherishx.com/uploads/1779530537_original.jpg?format=avif&width=3840&height=3840" class="decor-image" alt="Birthday Decor">
+                 <button class="wishlist-btn">♡</button>
+             </div>            
+            <div class="decor-content">
+                <h5 class="decor-title">Balloons And Bow Birthday Decor</h5>
+                <p class="decor-location">At your location</p> 
+                <div class="decor-footer"> 
+                    <div>
+                        <div class="rating">★★★★★</div>
+                        <a href="#" class="book-btn">BOOK NOW</a>
+                    </div>
+                    <div class="price">₹7599</div> 
+                </div> 
+            </div>  
+        </div>
+</div> 
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/1779534992_original.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+          <div class="decor-card">   
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/1779715643_original.jpg?format=avif&width=3840&height=3840" class="decor-image"
+             alt="Birthday Decor">
+
+        <button class="wishlist-btn">
+            ♡
+        </button>
+
+    </div>
+
+    <div class="decor-content">
+
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+
+        <p class="decor-location">
+            At your location
+        </p>
+
+        <div class="decor-footer">
+
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+
+            <div class="price">
+                ₹7599
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/jungle-theme-kids-birthday-decoration.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div> 
+             </div>
+             <div class="card-footer text-center">
+                 <a href="#" class="text-white btn btn-danger">Show All The kids Birthday Decodar</a>
+             </div>
+         </div>
+     </div> 
+  </div>  
+ <!-- ================= SECTION 3: KIDS BANNER ================= --> 
+ <!-- ================= SECTION 2: WENDING  BANNER ================= -->   
+  
+ <div class="row col">    
+   <div class="prewedding-section"> 
+    <div class="prewedding-banner">
+        <!-- Center Main Banner -->
+        <div class="center-banner">
+            <img src="https://cheetah.cherishx.com/website_layout/2200x450_Pre-wedding_Desktop_20240930_132612.jpg?format=avif"
+                 alt="Pre Wedding Banner" height="300">
+        </div>
+
+        <!-- Left Haldi Card -->
+        <div class="side-card left-card pt-4">
+            <img src="https://cheetah.cherishx.com/website_layout/1100x400_Pre-wedding_Desktop_01_20240930_132612.jpg?format=avif"
+                 alt="Haldi Decoration">
+
+            <div class="card-title">
+                HALDI
+            </div>
+        </div>
+
+        <!-- Right Mehndi Card -->
+        <div class="side-card right-card pt-4">
+            <img src="https://cheetah.cherishx.com/website_layout/1100x400_Pre-wedding_Desktop_02_20240930_132612.jpg?format=avif"
+                 alt="Mehndi Decoration">
+
+            <div class="card-title">
+                MEHNDI
+            </div>
+        </div>
+
+    </div>
+
+</div>
+ </div>
+ <div class="row">
+     <div class="col-12">
+         <div class="card">
+             <div class="card-header text-center">
+                 <h6 class="banner-section-title">Level Up Your Birthday Party</h6>
+             </div>
+             <div class="card-body">
+                 <div class="container-fluid col-12 mt-3 mb-2">   
+    <div class="row g-4">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+             <div class="decor-image-wrapper">
+                 <img src="https://cheetah.cherishx.com/uploads/1779530537_original.jpg?format=avif&width=3840&height=3840" class="decor-image" alt="Birthday Decor">
+                 <button class="wishlist-btn">♡</button>
+             </div>            
+            <div class="decor-content">
+                <h5 class="decor-title">Balloons And Bow Birthday Decor</h5>
+                <p class="decor-location">At your location</p> 
+                <div class="decor-footer"> 
+                    <div>
+                        <div class="rating">★★★★★</div>
+                        <a href="#" class="book-btn">BOOK NOW</a>
+                    </div>
+                    <div class="price">₹7599</div> 
+                </div> 
+            </div>  
+        </div>
+</div> 
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/1779534992_original.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+          <div class="decor-card">   
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/1779715643_original.jpg?format=avif&width=3840&height=3840" class="decor-image"
+             alt="Birthday Decor">
+
+        <button class="wishlist-btn">
+            ♡
+        </button>
+
+    </div>
+
+    <div class="decor-content">
+
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+
+        <p class="decor-location">
+            At your location
+        </p>
+
+        <div class="decor-footer">
+
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+
+            <div class="price">
+                ₹7599
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+           <div class="decor-card">    
+    <div class="decor-image-wrapper">
+        <img src="https://cheetah.cherishx.com/uploads/jungle-theme-kids-birthday-decoration.jpg?format=avif&width=3840&height=3840"
+             class="decor-image"
+             alt="Birthday Decor">
+        <button class="wishlist-btn">
+            ♡
+        </button>
+    </div>
+    <div class="decor-content">
+        <h5 class="decor-title">
+            Balloons And Bow Birthday Decor
+        </h5>
+        <p class="decor-location">
+            At your location
+        </p>
+        <div class="decor-footer">
+            <div>
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <a href="#" class="book-btn">
+                    BOOK NOW
+                </a>
+            </div>
+            <div class="price">
+                ₹7599
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div> 
+             </div>
+             <div class="card-footer text-center">
+                 <a href="#" class="text-white btn btn-danger">Show All The kids Birthday Decodar</a>
+             </div>
+         </div>
+     </div> 
+  </div>
+
+ <!-- ================= SECTION 3: WENDING BANNER ================= --> 
