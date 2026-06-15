@@ -25,4 +25,9 @@
     <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shubhdecoration.Data\Shubhdecoration.Data.csproj" />
+    <ProjectReference Include="..\Shubhdecoration.Services\Shubhdecoration.Services.csproj" />
+  </ItemGroup>
+
 </Project>

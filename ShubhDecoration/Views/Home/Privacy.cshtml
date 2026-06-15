@@ -1,6 +1,183 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿ <html>
+<head>
+</head>
+<body>
+<div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 850px; margin: 0 auto; padding: 40px; color: #333; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.05); border: 1px solid #eee; position: relative; overflow: hidden;">    
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 90px; font-weight: bold; color: rgba(5, 50, 43, 0.05); z-index: 0; pointer-events: none; white-space: nowrap; user-select: none; text-transform: uppercase;">
+        @Model.HotelName
+    </div>
+    <div style="position: relative; z-index: 1;">        
+        <div style="width: 100%; background: linear-gradient(115deg, #05322b 38%, #5a8735 38%, #5a8735 46%, #f1f8f3 46%); border-radius: 4px; overflow: hidden; margin-bottom: 30px; min-height: 160px;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="vertical-align: middle; width: 50%; padding: 30px 0 30px 30px; color: #ffffff; font-size: 13px; line-height: 1.6;">
+                        <div style="margin-bottom: 2px;">@Model.SenderAddress</div>
+                        <div style="margin-bottom: 2px;">@Model.SenderContactEmail</div>
+                        <div style="margin-bottom: 2px;">@Model.SenderWebsite</div>
+                        <div>@Model.SenderPhone</div>
+                    </td>
+                    
+                    <td style="vertical-align: middle; width: 50%; text-align: right; padding: 30px 40px 30px 0;">
+                        <div style="display: inline-block; border: 1.5px solid #666; border-radius: 4px; padding: 4px 8px; text-align: center; font-size: 10px; font-weight: bold; color: #444; line-height: 1.2; background-color: #fff;">
+                            YOUR<br>LOGO
+                        </div>
+                        <div style="font-size: 24px; font-weight: bold; color: #05322b; margin-top: 8px; letter-spacing: 0.5px;">
+                            @Model.HotelName
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-<p>Use this page to detail your site's privacy policy.</p>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <tr>
+                <td style="background-color: #05322b; color: white; padding: 10px 15px; font-size: 18px; font-weight: bold; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; text-align: center;">
+                    Hotel Reservation Invoice
+                </td>
+            </tr>
+        </table>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 35px; font-size: 13px;">
+            <tr>
+                <td style="width: 50%; vertical-align: top; padding-right: 15px;">
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid #ccc;">
+                        <thead>
+                            <tr style="background-color: #eef1f5;">
+                                <th colspan="2" style="padding: 8px 12px; text-align: left; font-size: 13px; font-weight: bold; color: #333; border-bottom: 2px solid #ccc;">Send To</th>
+                            </tr>
+                        </thead>
+                        <tbody style="line-height: 1.5;">
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; width: 40%; border-right: 1px solid #eee;">Receiver Name</td>
+                                <td style="padding: 8px 12px; width: 60%;">@Model.ReceiverName</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Address</td>
+                                <td style="padding: 8px 12px;">@Model.ReceiverAddress</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Location</td>
+                                <td style="padding: 8px 12px;">@Model.ReceiverLocation</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">PostCode/City</td>
+                                <td style="padding: 8px 12px;">@Model.ReceiverPostCodeCity</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Telephone/E-mail</td>
+                                <td style="padding: 8px 12px;">@Model.ReceiverContact</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Receiver VAT No.</td>
+                                <td style="padding: 8px 12px;">@Model.ReceiverVatNumber</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                
+                <td style="width: 50%; vertical-align: top; padding-left: 15px;">
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid #ccc;">
+                        <thead>
+                            <tr style="background-color: #eef1f5;">
+                                <th colspan="2" style="padding: 8px 12px; text-align: left; font-size: 13px; font-weight: bold; color: #333; border-bottom: 2px solid #ccc;">Invoice Details</th>
+                            </tr>
+                        </thead>
+                        <tbody style="line-height: 1.5;">
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; width: 50%; border-right: 1px solid #eee;">Invoice No.</td>
+                                <td style="padding: 8px 12px; text-align: right; width: 50%;">@Model.InvoiceNumber</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Date</td>
+                                <td style="padding: 8px 12px; text-align: right;">@Model.InvoiceDate.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Order No.</td>
+                                <td style="padding: 8px 12px; text-align: right;">@Model.OrderNumber</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Country/Origin</td>
+                                <td style="padding: 8px 12px; text-align: right;">@Model.CountryOfOrigin</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Country/ Dest.</td>
+                                <td style="padding: 8px 12px; text-align: right;">@Model.CountryOfDestination</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Terms/Payment</td>
+                                <td style="padding: 8px 12px; text-align: right;">@Model.TermsOfPayment</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; font-weight: bold; background-color: #fafafa; border-right: 1px solid #eee;">Bill/Lading</td>
+                                <td style="padding: 8px 12px; text-align: right;">@Model.BillOfLading</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 25px;">
+            <thead>
+                <tr style="background-color: #eef1f5; text-align: left;">
+                    <th style="border: 1px solid #ccc; padding: 8px 12px; font-weight: bold; width: 45%;">Description</th>
+                    <th style="border: 1px solid #ccc; padding: 8px 12px; font-weight: bold; width: 15%;">Quantity</th>
+                    <th style="border: 1px solid #ccc; padding: 8px 12px; font-weight: bold; width: 20%;">Unit price</th>
+                    <th style="border: 1px solid #ccc; padding: 8px 12px; font-weight: bold; width: 20%; text-align: right;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LineItems)
+                {
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 8px 12px;">@item.Description</td>
+                        <td style="border: 1px solid #ccc; padding: 8px 12px;">@item.Quantity</td>
+                        <td style="border: 1px solid #ccc; padding: 8px 12px;">@item.UnitPrice.ToString("F2") L.E.</td>
+                        <td style="border: 1px solid #ccc; padding: 8px 12px; text-align: right;">@item.TotalAmount.ToString("F2") L.E.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; line-height: 1.8; margin-bottom: 50px;">
+            <tr>
+                <td style="width: 50%;"></td>
+                <td style="width: 50%;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 6px 0; font-weight: bold;">Subtotal</td>
+                            <td style="padding: 6px 0; text-align: right;">@Model.Subtotal.ToString("F2") L.E.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 6px 0; font-weight: bold;">Discount (10%)</td>
+                            <td style="padding: 6px 0; text-align: right;">@Model.DiscountAmount.ToString("F2") L.E.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 6px 0; font-weight: bold;">Tax 1</td>
+                            <td style="padding: 6px 0; text-align: right;">@Model.TaxAmount.ToString("F2") L.E.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; font-weight: bold; font-size: 15px;">Total</td>
+                            <td style="padding: 8px 0; text-align: right; font-weight: bold; font-size: 15px;">@Model.GrandTotal.ToString("F2") L.E.</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <table style="width: 100%; border-collapse: collapse; margin-top: 60px;">
+            <tr>
+                <td style="width: 60%;"></td>
+                <td style="width: 40%; text-align: center; font-size: 13px; color: #333;">
+                    <div style="border-bottom: 1px solid #666; width: 100%; margin-bottom: 8px; height: 45px;"></div>
+                    <strong>Authority Signature</strong>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>
+
+  
