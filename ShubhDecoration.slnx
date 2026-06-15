@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="Shubhdecoration.Data/Shubhdecoration.Data.csproj" Id="66ec0381-ecd1-462c-88f0-f4ec70df6217" />
+  <Project Path="Shubhdecoration.Repository/Shubhdecoration.Repository.csproj" Id="40047aa0-53d4-4f10-a784-7d1d022f9218" />
+  <Project Path="Shubhdecoration.Services/Shubhdecoration.Services.csproj" Id="f5ee84af-2df1-458c-8668-2a88261b4050" />
   <Project Path="ShubhDecoration/ShubhDecoration.csproj" />
 </Solution>

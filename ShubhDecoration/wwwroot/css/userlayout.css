@@ -1,0 +1,303 @@
+﻿body {
+    padding-top: 65px;
+}
+
+.footer-first {
+    margin-top: 10px;
+}
+
+/* --- Root Colors & Variables --- */
+:root {
+    --footer-bg: #22252a;
+    --footer-bottom-bg: #191b1f;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a5b0;
+    --accent-green: #8cc600;
+    --accent-blue: #0084ff;
+    --border-color: #2f333a;
+}
+
+/* --- Footer Base --- */
+.site-footer {
+    background-color: var(--footer-bg);
+    color: var(--text-secondary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding-top: 60px;
+    position: relative;
+}
+
+/* --- Grid Container (Device Friendly Layout) --- */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 0.8fr 1.2fr;
+    gap: 40px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Section 1: Brand / Logo Style --- */
+.brand-column .footer-logo {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.logo-herb {
+    color: var(--accent-green);
+}
+
+.logo-egy {
+    color: var(--accent-blue);
+}
+
+.logo-tm {
+    font-size: 12px;
+    vertical-align: super;
+    color: var(--accent-blue);
+}
+
+.logo-subtext {
+    font-size: 11px;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 15px 0;
+}
+
+.footer-description {
+    margin-bottom: 20px;
+}
+
+    .footer-description a {
+        color: var(--text-primary);
+        text-decoration: none;
+    }
+
+/* Social Icon Badges */
+.social-icons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-green);
+    transition: all 0.3s ease;
+}
+
+    .social-icon svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+    }
+
+    .social-icon:hover {
+        background-color: var(--accent-green);
+        color: #fff;
+        border-color: var(--accent-green);
+    }
+
+/* --- Column Header Titles --- */
+.column-title {
+    color: var(--text-primary);
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+/* --- Section 2 & 3: Lists & Contact Details --- */
+.contact-list, .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .contact-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+.contact-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--text-secondary);
+}
+
+.links-list li {
+    margin-bottom: 12px;
+}
+
+.links-list a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    .links-list a:hover {
+        color: var(--text-primary);
+    }
+
+/* --- Section 4: Newsletter Panel --- */
+.newsletter-text {
+    margin-bottom: 20px;
+}
+
+.newsletter-form {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.newsletter-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 10px 15px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.newsletter-btn {
+    background-color: var(--accent-green);
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 10px 24px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+    .newsletter-btn:hover {
+        opacity: 0.9;
+    }
+
+/* --- Bottom Copyright Bar --- */
+.footer-bottom {
+    background-color: var(--footer-bottom-bg);
+    margin-top: 60px;
+    padding: 25px 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.bottom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.footer-bottom .highlight {
+    color: var(--accent-green);
+}
+
+.footer-bottom .highlight-alt {
+    color: var(--accent-green);
+}
+
+.footer-bottom .credits {
+    text-align: right;
+    font-size: 13px;
+}
+
+/* --- Scroll To Top Button Anchor --- */
+.scroll-top-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background-color: var(--accent-green);
+    color: #fff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+    .scroll-top-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .scroll-top-btn:hover {
+        transform: translateY(-3px);
+    }
+
+/* --- Media Queries (Device Responsive Breakdown) --- */
+
+/* Tablets / Medium Screens */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 30px;
+    }
+    .footer-bottom .credits {
+        text-align: left;
+    }
+}
+/* Mobile Phones / Small Screens */
+@media (max-width: 576px) {
+    .site-footer {
+        padding-top: 40px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .bottom-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-bottom .credits {
+        text-align: left;
+        margin-top: 5px;
+    }
+
+    .scroll-top-btn {
+        position: fixed; /* Becomes floating button on mobile viewports */
+        bottom: 20px;
+        right: 20px;
+        z-index: 99;
+    }
+}
