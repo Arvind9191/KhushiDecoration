@@ -1,0 +1,65 @@
+﻿  @using Shubhdecoration.Data.Account
+@model LoginModel
+@{
+    Layout = null;
+}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="~/css/auth-style.css" asp-append-version="true" />
+    <link href="~/css/loginstyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page-container">
+        <div class="form-card">
+            <button class="close-btn" type="button" onclick="window.history.back();">&times;</button>
+            <h2 class="form-title">
+                <span class="dot">•</span> Login Form <span class="dot">•</span>
+            </h2>
+            <form asp-action="Login" asp-controller="Account" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger-summary"></div>
+                <div class="input-group">
+                    <input asp-for="UserName" required placeholder="" autocomplete="off" />
+                    <label asp-for="UserName"><span class="required">*</span> Username/Email</label>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="input-group password-group">
+                    <input asp-for="Password" required placeholder=" " autocomplete="off" type="password" id="RegPassword" />
+                    <label asp-for="Password"><span class="required">*</span> Password</label>
+                    <span class="password-toggle" onclick="togglePassword('RegPassword', 'toggleTextPass')" id="toggleTextPass">SHOW</span>
+                    <span asp-validation-for="Password" class="text-danger"></span> 
+                </div>
+                <div class="row mb-2">
+                    <p>Create new account <a href="/Account/Signup">Sign-Up</a></p>
+                </div> 
+                <button type="submit" class="btn-submit">LOGIN</button>
+            </form>
+        </div>
+    </div> 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script> 
+            function togglePassword(inputId, toggleId) {
+                const passwordInput = document.getElementById(inputId);
+                const toggleText = document.getElementById(toggleId);
+    
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    toggleText.innerText = "HIDE";
+                } else {
+                    passwordInput.type = "password";
+                    toggleText.innerText = "SHOW";
+                }
+            }
+    </script>
+</body>
+</html>

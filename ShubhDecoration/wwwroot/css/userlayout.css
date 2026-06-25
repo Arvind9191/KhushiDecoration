@@ -1,5 +1,6 @@
 ﻿body {
     padding-top: 65px;
+    padding-bottom: 65px;
 }
 
 .footer-first {
@@ -82,13 +83,13 @@
         text-decoration: none;
     }
 
+
 /* Social Icon Badges */
 .social-icons {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-}
-
+} 
 .social-icon {
     width: 36px;
     height: 36px;
@@ -112,8 +113,7 @@
         color: #fff;
         border-color: var(--accent-green);
     }
-
-/* --- Column Header Titles --- */
+     
 .column-title {
     color: var(--text-primary);
     font-size: 22px;
@@ -121,9 +121,7 @@
     margin-top: 0;
     margin-bottom: 25px;
     position: relative;
-}
-
-/* --- Section 2 & 3: Lists & Contact Details --- */
+} 
 .contact-list, .links-list {
     list-style: none;
     padding: 0;
@@ -144,6 +142,16 @@
     margin-top: 3px;
     color: var(--text-secondary);
 }
+.navbar-expand-lg {
+    background: #fff;
+    color:black;
+}
+ul li a.href-link {
+    color: cornflowerblue;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 
 .links-list li {
     margin-bottom: 12px;
@@ -157,9 +165,7 @@
 
     .links-list a:hover {
         color: var(--text-primary);
-    }
-
-/* --- Section 4: Newsletter Panel --- */
+    } 
 .newsletter-text {
     margin-bottom: 20px;
 }
@@ -196,9 +202,7 @@
 
     .newsletter-btn:hover {
         opacity: 0.9;
-    }
-
-/* --- Bottom Copyright Bar --- */
+    } 
 .footer-bottom {
     background-color: var(--footer-bottom-bg);
     margin-top: 60px;
@@ -232,9 +236,7 @@
 .footer-bottom .credits {
     text-align: right;
     font-size: 13px;
-}
-
-/* --- Scroll To Top Button Anchor --- */
+} 
 .scroll-top-btn {
     position: absolute;
     right: 20px;
@@ -260,10 +262,7 @@
     .scroll-top-btn:hover {
         transform: translateY(-3px);
     }
-
-/* --- Media Queries (Device Responsive Breakdown) --- */
-
-/* Tablets / Medium Screens */
+     
 @media (max-width: 992px) {
     .footer-container {
         grid-template-columns: 1fr 1fr;
@@ -272,8 +271,7 @@
     .footer-bottom .credits {
         text-align: left;
     }
-}
-/* Mobile Phones / Small Screens */
+} 
 @media (max-width: 576px) {
     .site-footer {
         padding-top: 40px;
@@ -295,7 +293,7 @@
     }
 
     .scroll-top-btn {
-        position: fixed; /* Becomes floating button on mobile viewports */
+        position: fixed;  
         bottom: 20px;
         right: 20px;
         z-index: 99;

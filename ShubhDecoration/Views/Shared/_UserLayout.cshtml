@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using ShubhDecoration.Helper
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor Accessor
+@using Newtonsoft.Json;
+@{
+    string UserName = Accessor.HttpContext.Session.GetString("UserName") ?? "Profile";
+    if (string.IsNullOrEmpty(UserName))
+    {
+        UserName = "Profile";
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -14,7 +25,7 @@
     <header class="header header-menu">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Decorator">
+                <a class="navbar-brand  href-link" asp-controller="Decoration" asp-action="AllDecoration">
                     <img src="~/images/decologo.png"
                          alt="Logo"
                          class="img-fluid"
@@ -24,59 +35,64 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                               Birthdays 
+                            <a class="nav-link dropdown-toggle href-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Birthdays
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Kid`S Birthday</a></li>
-                                <li><a class="dropdown-item" href="#">Young Birthday</a></li>
-                                <li><a class="dropdown-item" href="#">Aniversary</a></li>
+                                <li><a class="dropdown-item href-link" href="/Decoration/MoreDetails?cId=@DecorationEnum.KidSBirthday">Kid`S Birthday</a></li>
+                                <li><a class="dropdown-item href-link" href="/Decoration/MoreDetails?cId=@DecorationEnum.YoungBirthday">Young Birthday</a></li>
+                                <li><a class="dropdown-item href-link" href="/Decoration/MoreDetails?cId=@DecorationEnum.Aniversary">Aniversary</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                               Festivals
+                            <a class="nav-link dropdown-toggle  href-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Festivals
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Depawali Celibration</a></li>
-                                <li><a class="dropdown-item" href="#">Holi Celebration</a></li>
-                                <li><a class="dropdown-item" href="#">Janmasthmi</a></li>
+                                <li><a class="dropdown-item href-link" href="/Decoration/MoreDetails?cId=@DecorationEnum.DepawaliCelibration">Depawali Celibration</a></li>
+                                <li><a class="dropdown-item href-link" href="/Decoration/MoreDetails?cId=@DecorationEnum.Naveratri">Naveratri</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Kid`S Decoration
+                            <a class="nav-link dropdown-toggle href-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Events
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item href-link" href="/Decoration/MoreDetails?cId=@DecorationEnum.Wedding">Wedding</a></li>
+                                <li><a class="dropdown-item href-link" href="/Decoration/MoreDetails?cId=@DecorationEnum.PreWedding">Pre-Wedding</a></li>
+                                <li><a class="dropdown-item href-link" href="/Decoration/MoreDetails?cId=@DecorationEnum.WeddingProcession">Wedding Procession</a></li>
                             </ul>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-lg-center gap-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="/Home/About">About US</a>
+                            <a class="nav-link  href-link" href="/Account/Enquiry">Enquiry</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Home/Contact">Contact US</a>
-                        </li> 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle fs-5 me-1"></i> Arvind Kumar
+                                <i class="bi bi-person-circle fs-5 me-1"></i>@UserName
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
-                            </ul>
+                            @if ((Accessor.HttpContext.Session.GetString("UserName") ?? "Profile") != "Profile")
+                            {
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item href-link" href="#">Dashboard</a></li>
+                                    <li><a class="dropdown-item href-link" href="#">Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="/Account/Logout">Logout</a></li>
+                                </ul>
+                            }
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-primary btn-sm w-100 w-lg-auto" href="#">Login</a>
-                        </li>
+                        @if ((Accessor.HttpContext.Session.GetString("UserName") ?? "Profile") == "Profile")
+                        {
+                            <li class="nav-item">
+                                <a class="btn  bg-primary btn-sm w-100 w-lg-auto text-white" href="/Account/Signup">SignUp</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn  bg-primary btn-sm w-100 w-lg-auto text-white" href="/Account/Login">SignIn</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -84,7 +100,7 @@
     </header>
     <div class="container-fluid">
         @RenderBody()
-    </div> 
+    </div>
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-column brand-column">
@@ -122,7 +138,8 @@
                     </li>
                     <li>
                         <svg class="contact-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" /></svg>
-                        <span>+91-9918284882<br />                            
+                        <span>
+                            +91-9918284882<br />
                             +91-9170528251<br />
                             +91-9129743791
                         </span>
@@ -136,11 +153,9 @@
             <div class="footer-column">
                 <h3 class="column-title">Quick Links</h3>
                 <ul class="links-list">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Blogs</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li> <a href="/Home/About">About US</a></li>
+                    <li><a href="/Home/Contact">Contact US</a></li>
                     <li><a href="#">Services</a></li>
-                    <li><a href="#">Our Team</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -154,17 +169,17 @@
         </div>
         <div class="footer-bottom">
             <div class="bottom-container">
-                <p class="copyright">© <span class="highlight">Herbegy Private Limited</span>, All Right Reserved.</p>
+                <p class="copyright">© <span class="highlight"></span>, All Right Reserved.</p>
                 <p class="credits">
                     Design By <span class="highlight-alt">AfiaInfotech</span><br />
-                    Hosted By: <span class="highlight-alt">Squarenet</span>
+                    Hosted By: <span class="highlight-alt">Shubh Decoration</span>
                 </p>
             </div>
         </div>
         <button class="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="Scroll to top">
             <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" /></svg>
         </button>
-    </footer> 
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
