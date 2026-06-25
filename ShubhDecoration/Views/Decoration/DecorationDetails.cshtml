@@ -1,0 +1,171 @@
+﻿@using Shubhdecoration.Data.Decoration
+@model AlldecorationModel;
+@{
+    ViewData["Title"] = "AllDecoration";
+    Layout = "~/Views/Shared/_UserLayout.cshtml"; 
+    decimal basePrice = 0; 
+    decimal gstAmount = basePrice * 0.18m;  
+    decimal totalAmount = basePrice + gstAmount;
+}  
+<style>
+    :root {
+        --brand-teal: #0099ca;
+        --brand-teal-hover: #007fa8;
+        --border-light: #eaedf1;
+        --text-dark: #2c3e50;
+        --text-muted: #7f8c8d;
+        --bg-card: #ffffff;
+        --bg-body: #f8f9fa;
+    }
+
+    body { background-color: var(--bg-body); }
+    .page-wrapper { max-width: 1200px; margin: 40px auto; padding: 0 15px; font-family: 'Segoe UI', system-ui, sans-serif; }
+    
+    .details-grid { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 40px; 
+        background: var(--bg-card); 
+        padding: 30px; 
+        border-radius: 12px; 
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    }
+
+    /* Left Side: Image Gallery */
+    .image-section { border-radius: 8px; overflow: hidden; position: relative; }
+    .main-image { width: 100%; height: 500px; object-fit: cover; border-radius: 8px; background: #f1f3f5; }
+    .category-badge { 
+        position: absolute; top: 20px; left: 20px; 
+        background: rgba(0, 153, 202, 0.9); color: white; 
+        padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; 
+        backdrop-filter: blur(4px);
+    }
+
+    /* Right Side: Content & Summary */
+    .info-section { display: flex; flex-direction: column; }
+    .deco-title { font-size: 2rem; color: var(--text-dark); margin: 0 0 10px 0; font-weight: 700; line-height: 1.2; }
+    .deco-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 25px; white-space: pre-line; }
+
+    /* Fare Summary Card */
+    .fare-summary-card { 
+        background: #f8fbff; 
+        border: 1px solid #d0e7ff; 
+        border-radius: 8px; 
+        padding: 20px; 
+        margin-bottom: 30px; 
+    }
+    .fare-summary-card h4 { margin: 0 0 15px 0; color: var(--brand-teal); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1rem; color: var(--text-dark); }
+    .summary-row.muted { color: var(--text-muted); font-size: 0.9rem; }
+    .summary-divider { border-top: 1px dashed #bcdcff; margin: 15px 0; }
+    .summary-row.total { font-size: 1.25rem; font-weight: 700; color: var(--brand-teal); margin-bottom: 0; }
+
+    /* Quick Booking Form */
+    .booking-section { margin-top: auto; border-top: 1px solid var(--border-light); padding-top: 25px; }
+    .booking-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; color: var(--text-dark); }
+    
+    .input-group-custom { position: relative; margin-bottom: 25px; }
+    .input-group-custom input { 
+        width: 100%; border: none; border-bottom: 1px solid var(--border-light); padding: 10px 0; 
+        font-size: 1rem; color: var(--text-dark); background: transparent; outline: none; box-sizing: border-box; 
+    }
+    .input-group-custom label { position: absolute; left: 0; top: 10px; color: #777; font-size: 1rem; pointer-events: none; transition: all 0.2s ease; }
+    .input-group-custom input:focus ~ label, .input-group-custom input:not(:placeholder-shown) ~ label, .input-group-custom input[type="date"] ~ label {
+        top: -15px; font-size: 0.85rem; color: var(--brand-teal); font-weight: 500;
+    }
+    .input-group-custom input:focus { border-bottom: 2px solid var(--brand-teal); }
+
+    .btn-book { 
+        width: 100%; background: var(--brand-teal); color: #fff; border: none; 
+        padding: 14px 24px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1.1rem; 
+        transition: background 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px;
+    }
+    .btn-book:hover { background: var(--brand-teal-hover); }
+
+    /* Responsive */
+    @@media (max-width: 900px) {
+        .details-grid { grid-template-columns: 1fr; }
+        .main-image { height: 350px; }
+    }
+</style> 
+@if (Model != null && Model.decorations != null && Model.decorations.Any())
+{
+    for (int i = 0; i < Model.decorations.Count(); i++)
+    {
+         
+        @if (Model.decorations[i].CardList != null && Model.decorations[i].CardList.Any())
+        {
+            for (int j = 0; j < Model.decorations[i].CardList.Count(); j++)
+            {
+                var card = Model.decorations[i].CardList[j];
+                           <div class="page-wrapper">
+    <a href="javascript:history.back()" style="display: inline-block; margin-bottom: 20px; color: var(--brand-teal); text-decoration: none; font-weight: 500;">
+        &larr; Back to Packages
+    </a> 
+    <div class="details-grid">
+        
+        <div class="image-section">
+            <div class="category-badge">@Model.decorations[i].CategoryName</div> 
+            <img src="@card.ImageUrl" class="main-image" alt="@card.DecoName" />
+        </div>
+
+        <div class="info-section">
+            <h1 class="deco-title">@card.DecoName</h1>
+            <p class="deco-desc">
+                @card.Description 
+            </p>
+
+            <div class="fare-summary-card">
+                <h4>🧾 Fare Summary</h4>
+                
+                <div class="summary-row">
+                    <span>Base Fare (@card?.DecoName)</span>
+                    <span>₹ @card.Price.ToString("N2")</span>
+                </div>
+                <div class="summary-row muted">
+                    <span>GST(18%)</span>
+                    <span>₹ @gstAmount.ToString("N2")</span>
+                </div>
+                <div class="summary-row muted">
+                    <span>Setup & Service Charges</span>
+                    <span style="color: #28a745;">Included</span>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-row total">
+                    <span>Total Amount</span>
+                    <span>₹ @totalAmount.ToString("N2")</span>
+                </div>
+            </div> 
+            <div class="booking-section">
+                <div class="booking-title">Reserve This Setup</div>
+                
+                <form asp-controller="Booking" asp-action="Proceed" method="post">
+                    <input type="hidden" name="DecoTypeId" value="@card.DecoTypeId" /> 
+                    <div class="input-group-custom">
+                        <input type="date" name="EventDate" id="EventDate" required placeholder=" " autocomplete="off" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        <label for="EventDate">Select Event Date</label>
+                    </div> 
+                    <button type="submit" class="btn-book">
+                        Book Now ➔
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>            
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center text-muted">
+                <p>No items found under this category.</p>
+            </div>
+        } 
+    }
+}
+@section Scripts {
+    <script src="~/js/custom-carousel.js" asp-append-version="true"></script>
+}

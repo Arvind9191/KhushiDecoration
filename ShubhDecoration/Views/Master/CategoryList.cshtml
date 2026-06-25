@@ -1,0 +1,64 @@
+﻿@using Shubhdecoration.Data.Account
+@model DashboardModel;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/css/dashboard.css" rel="stylesheet" />
+<div>
+    <main class="main-content">
+        <header class="top-header">
+            <button class="toggle-sidebar-btn" onclick="toggleSidebar()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <div class="user-profile-section">
+                <span class="welcome-text">Welcome, <strong>Admin</strong></span>
+                <div class="avatar">A</div>
+            </div>
+        </header>
+        <div class="dashboard-body"> 
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>Recent Event Enquiries</h2>
+                </div>
+                <div class="responsive-table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User Name</th> 
+                                <th>Mobile No</th>
+                                <th>Email</th>
+                                @* <th>Uset Type</th> *@
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(Model.UserList != null && Model.UserList.Count > 0)
+                            {
+                                foreach(var user in Model.UserList)
+                                {
+                                    <tr>
+                                        <td>@(user.FName+" "+user.LName)</td> 
+                                        <td>@user.MobileNo</td>  
+                                        <td>@user.EmailId</td>  
+                                        @* <td>@user.UserRole</td>   *@
+                                        <td></td>  
+                                        <td> 
+                                            @if(user.IsActive)
+                                            {
+                                                <span class="status-badge badge-success">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="status-badge badge-pending">In-Active</span>
+                                            }
+                                        </td>  
+                                    </tr>
+                                }
+                            } 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

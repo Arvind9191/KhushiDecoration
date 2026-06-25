@@ -1,0 +1,182 @@
+﻿.main-content {
+    flex: 1;
+    /* margin-left: 260px;   */
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.top-header {
+    height: 70px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e3eaf3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.toggle-sidebar-btn {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    display: none; /* Hidden on Desktop */
+}
+
+.user-profile-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.welcome-text {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #1263d7 0%, #0cd6a2 100%);
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* ==========================================
+   DASHBOARD BODY & CARDS
+   ========================================== */
+.dashboard-body {
+    padding: 30px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 25px;
+}
+
+/* Metrics Dynamic Grid Layout */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.card {
+    border-radius: 8px;
+    padding: 24px;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.gradient-card-1 {
+    background: linear-gradient(135deg, #1263d7 0%, #0099ff 100%);
+}
+
+.gradient-card-2 {
+    background: linear-gradient(135deg, #0bafc2 0%, #0cd6a2 100%);
+}
+
+.gradient-card-3 {
+    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+}
+
+.card-info h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.85;
+    margin-bottom: 8px;
+}
+
+.card-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.card-icon-wrapper {
+    opacity: 0.3;
+}
+
+.table-container {
+    background-color: #ffffff;
+    border: 1px solid #e3eaf3;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    overflow: hidden;
+}
+
+.table-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e3eaf3;
+}
+
+    .table-header h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+.responsive-table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Handles horizontal scrolling dynamically on tiny phones */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+    table th {
+        background-color: #f8fafc;
+        color: #64748b;
+        padding: 14px 24px;
+        font-weight: 600;
+        border-bottom: 1px solid #e3eaf3;
+    }
+
+    table td {
+        padding: 16px 24px;
+        color: #334155;
+        border-bottom: 1px solid #f0f4f9;
+    }
+
+    table tr:last-child td {
+        border-bottom: none;
+    }
+
+/* Row Badges Status colors */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge-cancelled {
+    background-color: #fee2e2;
+    color: #991b1b;
+}

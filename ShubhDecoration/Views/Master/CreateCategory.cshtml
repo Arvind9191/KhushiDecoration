@@ -1,0 +1,55 @@
+﻿@using Shubhdecoration.Data.Decoration;
+@model Shubhdecoration.Data.Decoration.Category
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+} 
+<div class="card">
+    <div class="card-header">
+        <h5>New Decoration Category</h5>
+    </div>
+    <div class="card-body">
+        <div class="form-card-premium">
+            <form asp-controller="Master" asp-action="CreateCategory" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()  
+                <div class="form-grid-2col">
+                    <div class="input-group-custom">
+                        <input asp-for="CategoryName" required placeholder=" " />
+                        <label asp-for="CategoryName"></label>
+                        <span asp-validation-for="CategoryName" class="text-danger-msg"></span> 
+                    </div> 
+                    <div class="input-group-custom file-wrapper-custom">
+                        <input type="file" asp-for="ImgFile" required placeholder=" " accept="jpg,png,jpeg" />
+                        <label asp-for="ImgFile"><span class="asterisk">*</span>Upload Decoration Image</label>
+                        <span asp-validation-for="ImgFile" class="text-danger-msg"></span>
+                    </div>
+                </div> 
+                <div class="input-group-custom">
+                    <textarea asp-for="Description" rows="3" placeholder=" "></textarea>
+                    <label asp-for="Description">Description / Package Inclusions</label>
+                    <span asp-validation-for="Description" class="text-danger-msg"></span>
+                </div> 
+                <div class="switch-container-row">
+                    <label class="switch-label-text">Set Item Status Active</label>
+                    <label class="custom-switch">
+                        <input type="checkbox" asp-for="IsActive" checked />
+                        <span class="switch-slider"></span>
+                    </label>
+                </div> 
+                <div class="form-actions-area">
+                    <a href="/Master/CategoryList" class="btn-cancel">Back to List</a>
+                    <button type="submit" class="btn-submit-premium">Save Category</button>
+                </div>
+            </form> 
+        </div> 
+    </div>
+</div> 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+ 
