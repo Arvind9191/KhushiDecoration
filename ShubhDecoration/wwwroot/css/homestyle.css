@@ -1277,7 +1277,9 @@ p {
         width: 100%;
         border: none;
         border-bottom: 1px solid var(--border-light);
-        padding: 5px 0;
+        padding-top: 5px;
+        padding-left: 10px;
+        padding-bottom: 10px;
         font-size: 1rem;
         color: var(--text-dark);
         background: transparent;
@@ -1298,6 +1300,7 @@ p {
     .input-group-custom .asterisk {
         color: red;
         margin-right: 2px;
+        margin-top:5px;
     }
 
     /* Trigger transitions */

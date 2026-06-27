@@ -9,12 +9,23 @@ namespace Shubhdecoration.Data.Common
     {
 
     }
-
+    public class FileDetails
+    {
+        public string FileName { get; set; } = string.Empty;
+        public string Extension { get; set; } = string.Empty;
+        public string ErrorMessage { get; set; } = string.Empty;
+        public string FileUrl { get; set; } = string.Empty;
+        public bool IsSuccess { get; set; }
+    }
     public class ResponseModel 
     {
-        public int Id { get; set; }
+        public int Id { get; set; }  
+        public int InfoType { get; set; }
         public bool IsSuccess { get; set; }
-        public string Message { get; set; } = string.Empty; 
+        public string Title { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;  
+        public string UserName { get; set; } = string.Empty; 
+        public string Password { get; set; } = string.Empty; 
     } 
     public class DdlCotegoties
     {

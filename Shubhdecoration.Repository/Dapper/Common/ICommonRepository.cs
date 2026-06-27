@@ -9,6 +9,7 @@ namespace Shubhdecoration.Repository.Dapper.Common
     public interface ICommonRepository
     {
         List<Dropdown> DdlCotegoties();
-        Task<string> UploadImageAsync(IFormFile file,string fname);
+        //Task<string> ImgbbUploadImage(IFormFile file,string fname);
+        Task<string> MegaUploadImage(IFormFile file, string fileName);
     }
 } 

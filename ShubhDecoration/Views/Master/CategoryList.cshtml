@@ -1,49 +1,39 @@
-﻿@using Shubhdecoration.Data.Account
-@model DashboardModel;
+﻿@using Shubhdecoration.Data.Decoration
+@model AlldecorationModel;
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <link href="~/css/dashboard.css" rel="stylesheet" />
 <div>
-    <main class="main-content">
-        <header class="top-header">
-            <button class="toggle-sidebar-btn" onclick="toggleSidebar()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-            <div class="user-profile-section">
-                <span class="welcome-text">Welcome, <strong>Admin</strong></span>
-                <div class="avatar">A</div>
-            </div>
-        </header>
-        <div class="dashboard-body"> 
+    <main class="main-content"> 
+        <div class="dashboard-body">
             <div class="table-container">
                 <div class="table-header">
-                    <h2>Recent Event Enquiries</h2>
+                    <h2>Recent Event Enquiries</h2> 
+                    <a href="/Master/CreateCategory" class="btn-add-new">Add New</a>
                 </div>
-                <div class="responsive-table-wrapper">
-                    <table>
+                <div class="responsive-table-wrapper p-2">
+                    <table id="tblCategoty">
                         <thead>
                             <tr>
-                                <th>User Name</th> 
-                                <th>Mobile No</th>
-                                <th>Email</th>
-                                @* <th>Uset Type</th> *@
+                                <th>Caategory</th>
+                                <th>Description</th>
+                                <th>CreatedAt</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(Model.UserList != null && Model.UserList.Count > 0)
+                            @if (Model.CategoryList != null && Model.CategoryList.Count() > 0)
                             {
-                                foreach(var user in Model.UserList)
+                                foreach (var user in Model.CategoryList)
                                 {
                                     <tr>
-                                        <td>@(user.FName+" "+user.LName)</td> 
-                                        <td>@user.MobileNo</td>  
-                                        <td>@user.EmailId</td>  
-                                        @* <td>@user.UserRole</td>   *@
-                                        <td></td>  
-                                        <td> 
-                                            @if(user.IsActive)
+                                        <td>@(user.CategoryName)</td>
+                                        <td>@(user.Description)</td>
+                                        <td>@(user.CreatedAt)</td>
+                                        <td>
+                                            @if (user.IsActive)
                                             {
                                                 <span class="status-badge badge-success">Active</span>
                                             }
@@ -51,14 +41,32 @@
                                             {
                                                 <span class="status-badge badge-pending">In-Active</span>
                                             }
-                                        </td>  
+                                        </td>
+                                        <td>
+                                            <a href="/Master/EditCategory?CId=@user.CategoryId" class="btn btn-info">Edit</a>
+                                        </td>
                                     </tr>
                                 }
-                            } 
+                            }
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </main>
+    </main> 
 </div>
+@section scripts {
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <script src="~/js/jquery-ui.js"></script> 
+    <script type="text/javascript">
+        $(function () {
+        $("#tblCategoty").dataTable({ "ordering": true, 'iDisplayLength': 100 });
+        });
+        function print(url, windowName) {
+        newwindow = window.open(url, windowName, 'height=800,width=1000');
+        if (window.focus) { newwindow.focus() }
+        return false;
+        }
+
+    </script>
+}

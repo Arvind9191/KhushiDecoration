@@ -7,8 +7,7 @@ public class AuthorizationAttribute : Attribute, IAuthorizationFilter
 {
     public void OnAuthorization(AuthorizationFilterContext context)
     {
-        var descriptor = context.ActionDescriptor as ControllerActionDescriptor;
-
+        var descriptor = context.ActionDescriptor as ControllerActionDescriptor; 
         var controllerName = descriptor?.ControllerName;
         var actionName = descriptor?.ActionName; 
         if (controllerName == "Account" &&  (actionName == "Login" || actionName == "Register"))

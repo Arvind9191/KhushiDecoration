@@ -6,8 +6,7 @@ using Shubhdecoration.Data.Account;
 using Shubhdecoration.Repository.Dapper.Decoration;
 
 namespace ShubhDecoration.Controllers.Admin
-{
-    //   ManageDecoration/CreateUser
+{ 
     [AuthorizationAttribute] 
     public class DecorationManageController : Controller
     {

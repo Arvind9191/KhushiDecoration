@@ -1,8 +1,9 @@
 ﻿using Shubhdecoration.DataAccess.Dapper;
+using Shubhdecoration.Repository.Dapper;
 using Shubhdecoration.Repository.Dapper.Account;
 using Shubhdecoration.Repository.Dapper.Common;
 using Shubhdecoration.Repository.Dapper.Decoration;
-using Shubhdecoration.Repository.Master;
+using Shubhdecoration.Repository.Dapper.Master;
 using Shubhdecoration.Services.Account;
 
 namespace ShubhDecoration.Programs
@@ -17,6 +18,7 @@ namespace ShubhDecoration.Programs
             services.AddScoped<IDecorationRepository, DecorationRespository>();
             services.AddScoped<ICommonRepository, CommonRepository>();
             services.AddScoped<IMasterRepository, MasterRepository>();
+            services.AddScoped<IUnitOfWorks, UnitOfWorks>();
             return services;
         }
     }

@@ -11,9 +11,11 @@ namespace Shubhdecoration.Repository.Dapper.Account
     public class AccountRepo : IAccountRepo
     {
         private readonly IConnecctions _connecctions;
-        public AccountRepo(IConnecctions connecctions)
+        private readonly IUnitOfWorks _unitOfWorks;
+        public AccountRepo(IConnecctions connecctions, IUnitOfWorks unitOfWorks)
         {
             _connecctions = connecctions;
+            _unitOfWorks = unitOfWorks;
         }
         public async Task<UserProfile> Login(LoginModel model)
         {
@@ -61,19 +63,18 @@ namespace Shubhdecoration.Repository.Dapper.Account
             string lastName = nameParts.Length > 1 ? nameParts[1] : string.Empty;
             try
             {
-                using (IDbConnection connection = _connecctions.GetConnection())
+                var parameter = new
                 {
-                    if (connection.State != ConnectionState.Open)
-                        connection.Open();
-                    int existingUserCount = await connection.ExecuteScalarAsync<int>(checkquery, new
-                    {
-                        EmailId = model.Email,
-                        MobileNo = model.Phone
-                    });
-                    if (existingUserCount > 0)
-                    {
-                        throw new Exception("Email or Mobile number already registered.");
-                    }
+                    EmailId = model.Email,
+                    MobileNo = model.Phone
+                };
+                var result = await _unitOfWorks.ExecuteScalarAsync(checkquery, parameter);
+                if (result.IsSuccess && result.Id > 0)
+                {
+                    throw new Exception("Email or Mobile number already registered.");
+                }
+                else
+                {
                     var parameters = new
                     {
                         FName = firstName,
@@ -85,37 +86,35 @@ namespace Shubhdecoration.Repository.Dapper.Account
                         UserRole = model.UserRole == 0 ? 2 : model.UserRole,
                         IsActive = true
                     };
-                    int result = await connection.ExecuteAsync(query, parameters);
-                    if (result > 0)
-                    {
+                    var result1 = await _unitOfWorks.ExecuteAsync(query, parameters);
+                    if (result1.Id > 0)
                         IsSuccess = true;
-                    }
-                    return IsSuccess;
                 }
             }
             catch (Exception ex)
             {
                 throw;
             }
-        } 
+            return IsSuccess;
+        }
         public async Task<List<UserListModel>> UserList()
         {
             const string checkUserSql = @"SELECT UserId, FName, LName, UserName, EmailId, MobileNo, UserRole, IsActive FROM UserApplication;";
             try
             {
                 using (IDbConnection connection = _connecctions.GetConnection())
-                { 
-                    var users = await connection.QueryAsync<UserListModel>(checkUserSql); 
-                    var userList = users.ToList(); 
+                {
+                    var users = await connection.QueryAsync<UserListModel>(checkUserSql);
+                    var userList = users.ToList();
                     if (userList.Count == 0)
                     {
                         throw new Exception("No user profiles exist in the system.");
-                    } 
+                    }
                     return userList;
                 }
             }
             catch (Exception ex)
-            { 
+            {
                 throw;
             }
         }

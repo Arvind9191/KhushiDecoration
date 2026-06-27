@@ -18,10 +18,18 @@ namespace Shubhdecoration.Data.Account
     {
         [Required]
         public string Name { get; set; } = string.Empty;
-        [Required]
+
+        [Required(ErrorMessage = "Email ID is required.")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address format.")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Please enter a valid corporate or standard email layout.")]
+        [Display(Name = "Email Id")]
         public string Email { get; set; } = string.Empty;
-        [Required]
+
+        [Required(ErrorMessage = "Mobile number is required.")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Invalid Mobile Number. Must be 10 digits starting with 6, 7, 8, or 9.")]
+        [Display(Name = "Mobile Number")]
         public string Phone { get; set; } = string.Empty;
+
         public int UserRole { get; set; }  
         [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
@@ -84,34 +92,32 @@ namespace Shubhdecoration.Data.Account
     {
         [Required(ErrorMessage = "Please enter your full name.")]
         [Display(Name = "Full Name")]
-        public string FullName { get; set; }
+        public string FullName { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Please enter your email address.")]
-        [EmailAddress(ErrorMessage = "Invalid email format.")]
-        [Display(Name = "Email Address")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Email ID is required.")] 
+        [EmailAddress(ErrorMessage = "Invalid Email Address format.")] 
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Please enter a valid corporate or standard email layout.")]
+        [Display(Name = "Email Id")]
+        public string Email { get; set; } = string.Empty; 
 
-        [Required(ErrorMessage = "Please enter your phone number.")]
-        [Phone(ErrorMessage = "Invalid phone number.")]
-        [Display(Name = "Phone Number")]
-        public string Phone { get; set; }
+        [Required(ErrorMessage = "Mobile number is required.")] 
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Invalid Mobile Number. Must be 10 digits starting with 6, 7, 8, or 9.")]
+        [Display(Name = "Mobile Number")]
+        public string Phone { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Please select an event type.")]
         [Display(Name = "Event Type")]
-        public string EventType { get; set; }
-
+        public string EventType { get; set; } = string.Empty;
         [Required(ErrorMessage = "Please select your event date.")]
         [DataType(DataType.Date)]
         [Display(Name = "Event Date")]
         public DateTime? EventDate { get; set; }
-
         [Required(ErrorMessage = "Please select an estimated budget.")]
         [Display(Name = "Budget Range")]
-        public string BudgetRange { get; set; }
-
+        public string BudgetRange { get; set; } = string.Empty;
         [Required(ErrorMessage = "Please provide some details about your vision.")]
         [StringLength(1000, ErrorMessage = "Details cannot exceed 1000 characters.")]
         [Display(Name = "Inquiry Details")]
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
     }
 }
