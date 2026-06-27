@@ -1,22 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shubhdecoration.Data.Decoration;
-using Shubhdecoration.Repository.Master;
+using Shubhdecoration.Repository.Dapper.Master;
 using ShubhDecoration.Helper;
 
 namespace ShubhDecoration.Controllers
 {
+    [AuthorizationAttribute]
     public class MasterController : Controller
     {
         private readonly ILogger<MasterController> _logger;
         private readonly IMasterRepository _masterRepository;
-        public MasterController(ILogger<MasterController> logger, IMasterRepository masterRepository)
+        private readonly IConfiguration _configuration;
+        public MasterController(ILogger<MasterController> logger, IMasterRepository masterRepository, IConfiguration configuration)
         {
             _logger = logger;
             _masterRepository = masterRepository;
+            _configuration = configuration;
         }
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<IActionResult> CategoryList()
+        {
+            AlldecorationModel model = new AlldecorationModel();
+            model.CategoryList = await _masterRepository.CategoryListOrSingle(0);
+            return View(model);
         }
         public IActionResult CreateCategory()
         {
@@ -26,11 +35,12 @@ namespace ShubhDecoration.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory(Category model)
         {
+            ModelState.Remove("CreatedAt");
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            try
+            else
             {
                 model.CreatedAt = DataHelper.CurrentDate("dd/MM/yyyy HH:mm:ss");
                 var res = await _masterRepository.InsertCategoryAsync(model);
@@ -43,10 +53,6 @@ namespace ShubhDecoration.Controllers
                 {
                     ModelState.AddModelError("", "Database me data save nahi ho paya.");
                 }
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "Kuch galat hua: " + ex.Message);
             }
             return View(model);
         }

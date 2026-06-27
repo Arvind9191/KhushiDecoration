@@ -4,6 +4,7 @@ using Shubhdecoration.Data.Account;
 using Shubhdecoration.Data.Common;
 using Shubhdecoration.Repository.Dapper.Account;
 using ShubhDecoration.Helper;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxTokenParser;
 namespace ShubhDecoration.Controllers
 {
     public class AccountController : Controller
@@ -99,7 +100,7 @@ namespace ShubhDecoration.Controllers
         public async Task<IActionResult> Signup(SignupModel model)
         {
             try
-            {
+            { 
                 if (!ModelState.IsValid)
                 {
                     return View(model);
@@ -107,13 +108,25 @@ namespace ShubhDecoration.Controllers
                 else
                 {
                     var result = await _accountrepo.Registration(model);
+                    if (result)
+                    {
+                        ResponseModel response = new ResponseModel
+                        {
+                            IsSuccess = true,
+                            InfoType = 1,
+                            Title = "Registration From Submit!",
+                            Message = "Your Registration from successfully submited.Please  check your email and back to login "
+                        };
+                        HttpContext.Session.SetObjectAsJson("response", response);
+                        return RedirectToAction("Index", "Home");
+                    } 
                 }
             }
             catch (Exception ex)
             {
 
             }
-            return View();
+            return View(model);
         }
         [HttpGet]
         public IActionResult Logout()
@@ -137,16 +150,16 @@ namespace ShubhDecoration.Controllers
 
             }
             return View(model);
-        } 
+        }
         [HttpGet]
         public IActionResult Enquiry()
         {
             return View();
         }
         [HttpPost]
-        [HttpPost]
         public IActionResult Enquiry(EnquiryViewModel model)
         {
+            ModelState.Remove(""); 
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -158,13 +171,13 @@ namespace ShubhDecoration.Controllers
                 emailModel.CC = "arvindsarasawan@gmail.com";
                 emailModel.Subject = $"New Event Enquiry from {model.FullName} - {DataHelper.CurrentDateTime()}";
                 string htmlTemplate = $@"
-            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #dcdcdc; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05);'>
+                  <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #dcdcdc; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05);'>
                 <div style='background-color: #0099ca; padding: 20px; text-align: center; color: white;'>
                     <h2 style='margin: 0; font-size: 24px;'>This enquiry recieved from Khushi Decoration</h2>
                 </div>
                 <div style='padding: 25px; background-color: #ffffff; color: #333333;'>
                     <p style='font-size: 16px;'>Hello Admin,</p>
-                    <p style='font-size: 15px; color: #555;'>A new customer has submitted an event enquiry. Here are the details:</p>
+                    <p style='font-size: 15px; color: #555;'>A new customer has submitted an event enquiry.Here are the details:</p>
                     
                     <table style='width: 100%; border-collapse: collapse; margin-top: 20px;'>
                         <tr>
@@ -206,14 +219,21 @@ namespace ShubhDecoration.Controllers
                 bool isEmailSent = DataHelper.SendEmailDopmain(emailModel);
                 if (isEmailSent)
                 {
-                    TempData["SuccessMessage"] = "Thank you! Your enquiry has been received securely. We will contact you soon.";
-                    return RedirectToAction("Index");  
+                    ResponseModel response = new ResponseModel
+                    {
+                        IsSuccess = true,
+                        InfoType = 2,
+                        Title = "ENQUIRY SEND!",
+                        Message = "Your Enquiry from successfully send."
+                    };
+                    HttpContext.Session.SetObjectAsJson("response", response);
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Sorry, we encountered an issue sending your enquiry. Please try again later.");
                     return View(model);
-                }
+                } 
             }
             catch (Exception ex)
             {

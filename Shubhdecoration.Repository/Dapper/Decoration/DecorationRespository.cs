@@ -43,24 +43,17 @@ namespace Shubhdecoration.Repository.Dapper.Decoration
         }  
         public async Task<List<DecorationModel>> GetAllDecoration(int catId, int decoId)
         { 
-            string sql = @"
-        SELECT 
-            c.categoryid, c.categoryname, c.description, c.imageurl, 
-            d.decotypeid, d.deconame, d.description, d.imageurl, d.price 
-        FROM Categories c 
+            string sql = @"SELECT c.categoryid, c.categoryname, c.description, c.imageurl, 
+                          d.decotypeid, d.deconame, d.description, d.imageurl, d.price     FROM Categories c 
         INNER JOIN DecoType d ON c.categoryid = d.categoryid
         WHERE c.isactive = true AND d.isactive = true";
 
-            var parameters = new DynamicParameters();
-
-            // 1. Agar CategoryId aati hai toh filter lagayein
+            var parameters = new DynamicParameters(); 
             if (catId > 0)
             {
                 sql += " AND c.categoryid = @CategoryId";
                 parameters.Add("CategoryId", catId);
-            }
-
-            // 2. Agar DecoId aati hai toh additional filter lagayein
+            } 
             if (decoId > 0)
             {
                 sql += " AND d.decotypeid = @DecoId";
@@ -70,40 +63,35 @@ namespace Shubhdecoration.Repository.Dapper.Decoration
             var decorationDictionary = new Dictionary<int, DecorationModel>();
 
             try
-            {
-                // '_connecctions' spelling thik kar lein agar aapke paas actual class mein alag hai
+            { 
                 using (IDbConnection connection = _connecctions.GetConnection())
                 {
                     await connection.QueryAsync<DecorationModel, CardViewModel, DecorationModel>(
                         sql,
                         (category, card) =>
-                        {
-                            // Dictionary mein check karein ki category pehle se hai ya nahi
+                        { 
                             if (!decorationDictionary.TryGetValue(category.CategoryId, out var currentCategory))
                             {
                                 currentCategory = category;
                                 currentCategory.CardList = new List<CardViewModel>();
                                 decorationDictionary.Add(currentCategory.CategoryId, currentCategory);
-                            }
-
-                            // Card data map karein (splitOn column ke baad ka data)
+                            } 
                             if (card != null)
                             {
-                                card.Title = card.DecoName; // ViewModel mapping
+                                card.Title = card.DecoName;  
                                 currentCategory.CardList.Add(card);
                             }
 
                             return currentCategory;
                         },
                         param: parameters,
-                        splitOn: "decotypeid" // Yeh split string bilkul sahi hai
+                        splitOn: "decotypeid"  
                     );
                 } 
                 return decorationDictionary.Values.ToList();
             }
             catch (Exception ex)
-            {
-                // Asal project mein throw ke sath log karna zaroori hai (e.g., _logger.LogError(ex, ...))
+            { 
                 throw;
             }
         }

@@ -12,17 +12,16 @@
     <title>Shubh Decoration</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/jquery.dataTables.css" rel="stylesheet" /> 
     <link rel="stylesheet" href="~/ShubhDecoration.styles.css" asp-append-version="true" />
      <link href="~/css/adminstyle.css" rel="stylesheet" />
 </head>
-<body>
-
+<body> 
     <div class="top-navbar">
         <div class="d-flex align-items-center">
             <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
             <h2>Shubh Decoration</h2>
-        </div>
-        
+        </div> 
         <div class="top-right-profile-zone">
             <div class="dropdown">
                 <button class="profile-dropdown-trigger dropdown-toggle" type="button" id="profileMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,8 +38,7 @@
                 </ul>
             </div>
         </div>
-    </div>
-
+    </div> 
     <div class="sidebar" id="sidebar">
         <ul class="sidebar-menu">
             <li>
@@ -57,6 +55,7 @@
                 </div>
                 <ul class="submenu" id="masterSubmenu">
                     <li><a href="/Master/CustomerList">Customer List</a></li>
+                    <li><a href="/Master/CategoryList">Cotegory List</a></li>
                 </ul>
             </li>
             <li class="has-submenu">
@@ -76,8 +75,7 @@
                 </a>
             </li>
         </ul>
-    </div>
-
+    </div> 
     <div class="content" id="contentArea">
         @if (TempData["Success"] != null)
         {
@@ -98,6 +96,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script> 
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
@@ -115,8 +114,7 @@
                     content.classList.toggle("expanded");
                     sidebar.classList.remove("active");
                 }
-            }
-
+            } 
             function toggleSubmenu(menuId, arrowId) {
                 var submenu = document.getElementById(menuId);
                 var arrow = document.getElementById(arrowId);
@@ -133,8 +131,7 @@
                     submenu.style.display = "block";
                     arrow.classList.add("rotate");
                 }
-            }
-
+            } 
             window.addEventListener('resize', function() {
                 var sidebar = document.getElementById("sidebar");
                 var content = document.getElementById("contentArea");

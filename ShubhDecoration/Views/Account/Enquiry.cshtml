@@ -1,51 +1,51 @@
-﻿@using Shubhdecoration.Data.Account 
-@model EnquiryViewModel 
+﻿@using Shubhdecoration.Data.Account
+@model EnquiryViewModel
 @{
     ViewData["Title"] = "Submit Enquiry";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-<link href="~/css/homestyle.css" rel="stylesheet" /> 
+<link href="~/css/homestyle.css" rel="stylesheet" />
 <div class="card mt-4 mb-4">
     <div class="card-header">
-        <h6 >Event Enquiry</h6>
+        <h6>Event Enquiry</h6>
     </div>
     <div class="card-body">
         <div class="page-wrapper">
-            <div class="split-layout">   
+            <div class="split-layout">
                 <div class="col-5-carousel" id="decorCarousel">
                     <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600" class="carousel-slide active" alt="Event 1" />
                     <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=600" class="carousel-slide" alt="Event 2" />
                     <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=600" class="carousel-slide" alt="Event 3" />
-                </div>   
-                <div class="col-7-form"> 
+                </div>
+                <div class="col-7-form">
                     <div class="form-title-bar">
-                       ENQUIRY FORM
-                    </div> 
-                    <form asp-controller="Account" asp-action="Enquiry" method="post"> 
+                        ENQUIRY FORM
+                    </div>
+                    <form asp-controller="Account" asp-action="Enquiry" method="post">
                         <div class="form-row">
                             <div class="input-group-custom teal-accent">
                                 <input asp-for="FullName" required placeholder=" " autocomplete="off" />
                                 <label asp-for="FullName"><span class="asterisk">*</span> Full Name</label>
                                 <span asp-validation-for="FullName" class="text-danger-msg"></span>
-                            </div> 
+                            </div>
                             <div class="input-group-custom">
                                 <input asp-for="Email" type="email" required placeholder=" " autocomplete="off" />
                                 <label asp-for="Email"><span class="asterisk">*</span> Email Address</label>
                                 <span asp-validation-for="Email" class="text-danger-msg"></span>
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-row">
                             <div class="input-group-custom">
-                                <input asp-for="Phone" type="tel" required placeholder=" " autocomplete="off" />
+                                <input asp-for="Phone" onkeyup="validateMobileNumber()" maxlength="10" required placeholder=" " autocomplete="off" />
                                 <label asp-for="Phone"><span class="asterisk">*</span> Phone Number</label>
-                                <span asp-validation-for="Phone" class="text-danger-msg"></span>
-                            </div> 
+                                <span asp-validation-for="Phone" class="text-danger-msg error-message"></span>
+                            </div>
                             <div class="input-group-custom">
                                 <input asp-for="EventDate" type="date" required placeholder=" " autocomplete="off" />
                                 <label asp-for="EventDate"><span class="asterisk">*</span> Event Date</label>
                                 <span asp-validation-for="EventDate" class="text-danger-msg"></span>
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-row">
                             <div class="input-group-custom">
                                 <select asp-for="EventType" required class="select-line">
@@ -60,7 +60,7 @@
                                 <span asp-validation-for="EventType" class="text-danger-msg"></span>
                             </div>
 
-                           @*  <div class="input-group-custom">
+                            @*  <div class="input-group-custom">
                                 <select asp-for="BudgetRange" required class="select-line">
                                     <option value="" disabled selected hidden></option>
                                     <option value="Economy">₹5,000 - ₹15,000</option>
@@ -86,19 +86,20 @@
                         </div>
 
                     </form>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
 </div>
-
+<script src="~/js/common.js"></script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-} 
+}
 
-<script> 
+<script>
+
     // Carousel Image rotation logic
     document.addEventListener("DOMContentLoaded", function () {
         const slides = document.querySelectorAll("#decorCarousel .carousel-slide");

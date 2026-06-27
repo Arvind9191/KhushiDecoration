@@ -21,8 +21,7 @@ namespace ShubhDecoration.Helper
         {
             var value = session.GetString(key);
             return value == null ? default : JsonConvert.DeserializeObject<T>(value);
-        }
-
+        } 
         public static int GenerateOTP()
         {
             var random = new Random();
@@ -156,9 +155,7 @@ namespace ShubhDecoration.Helper
             DateTime currentDateTime = DateTime.ParseExact(dateString, formate, System.Globalization.CultureInfo.InvariantCulture);
 
             return currentDateTime;
-        }
-
-
+        } 
         public static async Task<FileDetails> SaveFileAsync(IFormFile file, string rootPath, string folderName)
         {
             FileDetails fileDetails = new FileDetails();
@@ -210,12 +207,5 @@ namespace ShubhDecoration.Helper
         public static string Password { get; set; } = string.Empty;
         public static string Port { get; set; } = string.Empty;
         public static string Host { get; set; } = string.Empty;
-    }
-    public class FileDetails
-    {
-        public string FileName { get; set; } = string.Empty;
-        public string Extension { get; set; } = string.Empty;
-        public string ErrorMessage { get; set; } = string.Empty;
-        public bool IsSuccess { get; set; }
-    }
+    } 
 }

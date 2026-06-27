@@ -1,649 +1,159 @@
-﻿ 
-
-<style>
-    
-    .decor-card {
-        background: #fff;
-        border-radius: 18px;
-        overflow: hidden;
-        box-shadow: 0 2px 12px rgba(0,0,0,.10);
-        transition: all .4s ease;
-        height: 100%;
-        position: relative;
-    }
-        .decor-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 18px 35px rgba(0,0,0,.20);
-        }
-    .decor-image-wrapper {
-        position: relative;
-        overflow: hidden;
-    }
-    .decor-image {
-        width: 100%;
-        height: 320px;
-        object-fit: cover;
-        transition: transform .5s ease;
-    }
-    .decor-card:hover .decor-image {
-        transform: scale(1.08);
-    }
-    .wishlist-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        border: none;
-        background: rgba(255,255,255,.9);
-        font-size: 20px;
-        cursor: pointer;
-        z-index: 10;
-    }
-        .wishlist-btn:hover {
-            background: #fff;
-        }
-    .decor-content {
-        padding: 18px;
-    }
-    .decor-title {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 10px;
-        color: #222;
-    }
-    .decor-location {
-        color: #777;
-        margin-bottom: 10px;
-        font-size: 15px;
-    }
-    .decor-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-    }
-    .rating {
-        color: #FFC107;
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-    .price {
-        font-size: 24px;
-        font-weight: 700;
-        color: #111;
-    }
-    .book-btn {
-        background: #6f2dbd;
-        color: #fff;
-        text-decoration: none;
-        padding: 10px 18px;
-        border-radius: 6px;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 600;
-        transition: .3s;
-    }
-        .book-btn:hover {
-            background: #5a189a;
-            color: #fff;
+﻿@using Shubhdecoration.Data.Common
+@model ResponseModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        } 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f6f9;
+        } 
+        .page-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4); /* Page background dark transparent popup look */
+            padding: 15px;
+        } 
+        .form-card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: swalScaleIn 0.3s ease-out;
+        } 
+        @@keyframes swalScaleIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        } 
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #bcc2cb;
+            cursor: pointer;
+            transition: color 0.2s;
         }
 
-    @@media(max-width:992px) {
-        .decor-image {
-            height: 280px;
+        .close-btn:hover {
+            color: #6c757d;
+        } 
+        .swal-icon-placeholder {
+            width: 80px;
+            height: 80px;
+            border: 4px solid #a5dc86; /* Default Green for Success style */
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a5dc86;
+            font-size: 40px;
+            font-weight: bold;
+        } 
+        .form-title-main {
+            font-size: 26px;
+            font-weight: 600;
+            color: #545454;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        } 
+        .form-message-desc {
+            font-size: 16px;
+            font-weight: 400;
+            color: #545454;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            word-wrap: break-word;
+        } 
+        .swal-confirm-btn {
+            background-color: #7066e0;  
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 0 0 3px transparent;
+            transition: background-color 0.2s;
+        } 
+        .swal-confirm-btn:hover {
+            background-color: #5b51cc;
+        } 
+        .swal-confirm-btn:focus {
+            box-shadow: 0 0 0 3px rgba(112, 102, 224, 0.5);
+            outline: none;
         }
-
-        .decor-title {
-            font-size: 20px;
-        }
-    }
-
-    @@media(max-width:576px) {
-        .decor-image {
-            height: 250px;
-        }
-
-        .decor-title {
-            font-size: 18px;
-        }
-
-        .price {
-            font-size: 20px;
-        }
-
-        .book-btn {
-            padding: 8px 14px;
-            font-size: 13px;
-        }
-    }
-</style>
-
-
-<div class="row col-12 mt-3 mb-2">
-    <div class="row g-4 mt-2 mb-2">
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/love-memory-decor-with-photo-collage-setup.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
+    </style>
+</head>
+<body> 
+    <div class="page-container">
+        <div class="form-card">
+            <button class="close-btn" type="button" onclick="window.history.back();">&times;</button> 
+            @if(Model!=null &&  Model.IsSuccess)
+            {
+                <div class="swal-icon-placeholder">✓</div>
+                 <h2 class="form-title-main">
+                @Model.Title
+            </h2> 
+            <p class="form-message-desc text-su">
+            @if(Model.InfoType==1)
+                    { 
+                @Model.Message <a class="" href="/Account/Login">Login</a>
+           
+                    }
+                    else
+                    {
+                        @Model.Message  
+                    }
+                   </p> 
+            }  
+             
+            <button class="swal-confirm-btn" type="button" onclick="window.history.back();">
+                OK
+            </button>
         </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/kids-batman-ring-decoration-setup.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/yellow-elegance-for-a-special-annaprashan.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/white-and-gold-bliss-floral-birthday-decoration.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row g-4 mt-2 mb-2">
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/white-and-gold-bliss-floral-birthday-decoration.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/glowing-butterfly-birthday-party-decoration.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/3d-pink-bow-birthday-backdrop-decor.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/balloons-and-bow-birthday-decor.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row g-4 mt-2 mb-2">
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/birthday-special-balloon-decoration.jpg?format=avif&width=3840&height=3840" class="decor-image" alt="Birthday Decor">
-                    <button class="wishlist-btn">♡</button>
-                </div> 
-                <div class="decor-content">
-                    <h5 class="decor-title">Balloons And Bow Birthday Decor</h5>
-                    <p class="decor-location">At your location</p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">★★★★★</div>
-                            <a href="#" class="book-btn">BOOK NOW</a>
-                        </div>
-                        <div class="price">₹7599</div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card"> 
-                <div class="decor-image-wrapper"> 
-                    <img src="https://cheetah.cherishx.com/uploads/modern-birthday-vibes-with-a-black-and-silver-balloon-display.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor"> 
-                    <button class="wishlist-btn">
-                        ♡
-                    </button> 
-                </div> 
-                <div class="decor-content"> 
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5> 
-                    <p class="decor-location">
-                        At your location
-                    </p> 
-                    <div class="decor-footer"> 
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div> 
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div> 
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/canopy-setup-with-lights-cushions-and-cozy-decor.jpg?format=avif&width=3840&height=3840" class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">    
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/pink-and-silver-birthday-bliss-decor.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div> 
-            </div>
-        </div> 
     </div> 
-    <div class="row g-4 mt-2 mb-2">
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/black-bows-and-balloons-decor-for-birthday.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/pastel-and-rosegold-birthday-decoration.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/romantic-umbrella-fairy-light-decoration.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="decor-card">
-                <div class="decor-image-wrapper">
-                    <img src="https://cheetah.cherishx.com/uploads/pink-glitter-and-pookie-vibes-dreamy-birthday-decoration.jpg?format=avif&width=3840&height=3840"
-                         class="decor-image"
-                         alt="Birthday Decor">
-                    <button class="wishlist-btn">
-                        ♡
-                    </button>
-                </div>
-                <div class="decor-content">
-                    <h5 class="decor-title">
-                        Balloons And Bow Birthday Decor
-                    </h5>
-                    <p class="decor-location">
-                        At your location
-                    </p>
-                    <div class="decor-footer">
-                        <div>
-                            <div class="rating">
-                                ★★★★★
-                            </div>
-                            <a href="#" class="book-btn">
-                                BOOK NOW
-                            </a>
-                        </div>
-                        <div class="price">
-                            ₹7599
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>  
-
-
-
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    } 
+    <script>
+        function togglePassword(inputId, toggleId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleText = document.getElementById(toggleId); 
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleText.innerText = "HIDE";
+            } else {
+                passwordInput.type = "password";
+                toggleText.innerText = "SHOW";
+            }
+        }
+    </script>
+</body>
+</html>

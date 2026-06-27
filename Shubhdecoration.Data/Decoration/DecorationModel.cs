@@ -10,11 +10,11 @@ namespace Shubhdecoration.Data.Decoration
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
         public List<CardViewModel> CardList { get; set; } = new List<CardViewModel>();
-    }
-
+    } 
     public class AlldecorationModel
     {
         public List<DecorationModel> decorations { get; set; } = new List<DecorationModel>();
+        public List<Category> CategoryList { get; set; } = new List<Category>();
     }
     public class Category
     {
